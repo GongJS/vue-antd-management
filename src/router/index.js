@@ -10,6 +10,8 @@ import Loading from './../pages/ui/loadings'
 import Tab from './../pages/ui/tabs'
 import Carousel from './../pages/ui/carousel'
 import Gallery from './../pages/ui/gallery'
+import Login from './../pages/form/login'
+import Register from './../pages/form/register'
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +64,16 @@ export default new Router({
         path: '/ui/gallery',
         name: 'gallery',
         component: Gallery
+      },
+      {
+        path: '/form/login',
+        name: 'login',
+        component: Login
+      },
+      {
+        path: '/form/register',
+        name: 'register',
+        component: Register
       }
       ]
     }
