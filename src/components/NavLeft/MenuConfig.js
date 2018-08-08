@@ -72,11 +72,13 @@ const menuList = [
     children: [
       {
         title: '基础表格',
-        key: '/table/basic'
+        key: '/table/basicTable',
+        path: '/table/basicTable'
       },
       {
         title: '高级表格',
-        key: '/table/high'
+        key: '/table/highTable',
+        path: '/table/hightable'
       }
     ]
   },

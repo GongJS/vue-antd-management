@@ -12,6 +12,8 @@ import Carousel from './../pages/ui/carousel'
 import Gallery from './../pages/ui/gallery'
 import Login from './../pages/form/login'
 import Register from './../pages/form/register'
+import BasicTable from './../pages/table/basicTable'
+import HighTable from './../pages/table/highTable'
 Vue.use(Router)
 
 export default new Router({
@@ -74,6 +76,16 @@ export default new Router({
         path: '/form/register',
         name: 'register',
         component: Register
+      },
+      {
+        path: '/table/basicTable',
+        name: 'basicTable',
+        component: BasicTable
+      },
+      {
+        path: '/table/highTable',
+        name: 'highTable',
+        component: HighTable
       }
       ]
     }
