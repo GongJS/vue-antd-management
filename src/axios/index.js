@@ -39,7 +39,8 @@ export default class Axios {
         }
         if (response.status === 200) {
           let res = response.data
-          if (res.code === 0) {
+          // eslint-disable-next-line
+          if (res.code == 0) {
             resolve(res)
           } else {
           }

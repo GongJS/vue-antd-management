@@ -15,7 +15,7 @@
       :columns=columns2
       :dataSource="dataSource"
       :pagination=false
-      :scroll="{x:1500}"
+      :scroll="{x:1100}"
     />
     </a-card>
     <a-card title="表格排序" style="margin:10px 0">
@@ -38,10 +38,10 @@
       </template>
       <template slot="interest" slot-scope="text, record">
         <a-badge status="success" text="成功" v-if="text=='1'"/>
-        <a-badge status="error" text="报错" v-if="text=='2'"/>
-        <a-badge status="default" text="正常" v-if="text=='3'"/>
-        <a-badge status="processing" text="进行中" v-if="text=='4'"/>
-        <a-badge status="warning" text="警告" v-if="text=='5'"/>
+        <a-badge status="error" text="报错" v-else-if="text=='2'"/>
+        <a-badge status="default" text="正常" v-else-if="text=='3'"/>
+        <a-badge status="processing" text="进行中" v-else-if="text=='4'"/>
+        <a-badge status="warning" text="警告" v-else/>
       </template>
     </a-table>
     </a-card>

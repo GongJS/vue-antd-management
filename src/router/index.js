@@ -14,6 +14,7 @@ import Login from './../pages/form/login'
 import Register from './../pages/form/register'
 import BasicTable from './../pages/table/basicTable'
 import HighTable from './../pages/table/highTable'
+import City from './../pages/city/city'
 Vue.use(Router)
 
 export default new Router({
@@ -86,6 +87,11 @@ export default new Router({
         path: '/table/highTable',
         name: 'highTable',
         component: HighTable
+      },
+      {
+        path: '/city',
+        name: 'city',
+        component: City
       }
       ]
     }

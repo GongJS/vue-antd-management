@@ -107,9 +107,9 @@ const highColumns = [
   },
   {
     title: '用户名',
-    key: 'userName',
+    key: 'username',
     width: 80,
-    dataIndex: 'userName'
+    dataIndex: 'username'
   },
   {
     title: '性别',
@@ -184,10 +184,10 @@ const highColumns2 = [
   },
   {
     title: '用户名',
-    key: 'userName',
+    key: 'username',
     width: 100,
     fixed: 'left',
-    dataIndex: 'userName'
+    dataIndex: 'username'
   },
   {
     title: '性别',
@@ -238,21 +238,6 @@ const highColumns2 = [
     key: 'birthday',
     width: 150,
     dataIndex: 'birthday'
-  }, {
-    title: '生日',
-    key: 'birthday',
-    width: 150,
-    dataIndex: 'birthday'
-  }, {
-    title: '生日',
-    key: 'birthday',
-    width: 150,
-    dataIndex: 'birthday'
-  },{
-    title: '生日',
-    key: 'birthday',
-    width: 150,
-    dataIndex: 'birthday'
   },
   {
     title: '地址',
@@ -276,8 +261,8 @@ const highColumns3 = [
   },
   {
     title: '用户名',
-    key: 'userName',
-    dataIndex: 'userName'
+    key: 'username',
+    dataIndex: 'username'
   },
   {
     title: '性别',
@@ -349,7 +334,7 @@ const highColumns4 = [
   },
   {
     title: '用户名',
-    dataIndex: 'userName'
+    dataIndex: 'username'
   },
   {
     title: '性别',
