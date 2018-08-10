@@ -1,12 +1,20 @@
 <template>
   <div class="header">
     <a-row class="header-top">
-      <a-col :span="24">
-        <span>欢迎，{{userName}}</span>
-        <a href="#">退出</a>
-      </a-col>
+        <a-col span="6" class="logo" v-if="type === 'common'">
+          <img src="./../../assets/logo-ant.svg" alt=""/>
+          <span>Vue-Antd 通用管理系统</span>
+        </a-col>
+        <a-col :span="18" v-if="type === 'common'">
+           <span>欢迎，{{userName}}</span>
+           <a href="#">退出</a>
+        </a-col>
+        <a-col :span="24" v-else>
+          <span>欢迎，{{userName}}</span>
+          <a href="#">退出</a>
+        </a-col>
     </a-row>
-    <a-row class="breadcrumb">
+    <a-row class="breadcrumb" v-if="!(type === 'common')">
       <a-col :span="4" class="breadcrumb-title">
         首页
       </a-col>
@@ -24,6 +32,7 @@ import axios from '../../axios/index'
 import {Row, Col} from 'ant-design-vue'
 export default {
   name: 'Header',
+  props: ['type'],
   components: {
     'a-row': Row,
     'a-col': Col
@@ -69,12 +78,23 @@ export default {
       line-height: 60px;
       padding: 0 20px;
       text-align: right;
+      .logo{
+        line-height: 60px;
+        text-align: left;
+        font-size: 18px;
+        img{
+          height: 40px;
+          vertical-align: middle;
+        }
+        span{
+          margin-left: 5px;
+        }
+      }
       a{
-        margin-left: 30px;
+        margin-left: 40px;
       }
     }
     .breadcrumb{
-      box-sizing: border-box;
       height: 40px;
       line-height: 40px;
       padding: 0 20px;
@@ -95,7 +115,6 @@ export default {
       .weather{
         text-align: right;
         font-size: 14px;
-        height: 40px;
         .date{
           margin-right: 10px;
           vertical-align: middle;
@@ -110,6 +129,12 @@ export default {
           vertical-align: middle;
         }
       }
+    }
+  }
+  .simple-page{
+    .header-top{
+      background:#1890ff;
+      color:@colorM;
     }
   }
 </style>

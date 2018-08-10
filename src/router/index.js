@@ -15,6 +15,9 @@ import Register from './../pages/form/register'
 import BasicTable from './../pages/table/basicTable'
 import HighTable from './../pages/table/highTable'
 import City from './../pages/city/city'
+import Order from './../pages/order/order'
+import Detail from './../pages/order/detail/detail'
+import Common from './../pages/common/common'
 Vue.use(Router)
 
 export default new Router({
@@ -92,8 +95,22 @@ export default new Router({
         path: '/city',
         name: 'city',
         component: City
+      },
+      {
+        path: '/order/detail/',
+        name: 'order',
+        component: Order
       }
       ]
+    },
+    {
+      path: '/common',
+      component: Common,
+      children: [{
+        path: '/common/order/detail/:id',
+        name: 'orderDetail',
+        component: Detail
+      }]
     }
   ]
 })

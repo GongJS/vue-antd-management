@@ -97,7 +97,8 @@ const menuList = [
     children: [
       {
         title: '订单详情',
-        key: 'detail'
+        key: 'detail',
+        path: '/order/detail'
       },
       {
         title: '结束订单',
