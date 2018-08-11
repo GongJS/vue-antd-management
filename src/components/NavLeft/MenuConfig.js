@@ -99,16 +99,13 @@ const menuList = [
         title: '订单详情',
         key: 'detail',
         path: '/order/detail'
-      },
-      {
-        title: '结束订单',
-        key: 'finish'
       }
     ]
   },
   {
     title: '员工管理',
-    key: '/user'
+    key: '/user',
+    path: '/user'
   },
   {
     title: '车辆地图',

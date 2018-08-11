@@ -22,7 +22,7 @@ export default class Axios {
     let loading
     if (options.data && options.data.isShowLoading !== false) {
       loading = document.getElementById('ajaxLoading')
-      loading.style.display = 'none'
+      loading.style.display = 'block'
     }
     let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api'
     return new Promise((resolve, reject) => {

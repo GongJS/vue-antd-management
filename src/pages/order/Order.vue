@@ -36,7 +36,7 @@ import axios from './../../axios/index'
 import dataSource from './data'
 
 export default {
-  name: 'BasicTable',
+  name: 'order',
   components: {
     'a-button': Button,
     'a-table': Table,

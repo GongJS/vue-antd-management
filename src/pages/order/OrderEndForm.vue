@@ -67,7 +67,7 @@ const CollectionCreateForm = Form.create()(
 )
 
 export default {
-  name: 'CityOpenForm',
+  name: 'orderEndForm',
   props: ['visible', 'orderInfo'],
   methods: {
     handleCancel  () {

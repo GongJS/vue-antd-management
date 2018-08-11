@@ -16,6 +16,7 @@ import BasicTable from './../pages/table/basicTable'
 import HighTable from './../pages/table/highTable'
 import City from './../pages/city/city'
 import Order from './../pages/order/order'
+import User from './../pages/user/user'
 import Detail from './../pages/order/detail/detail'
 import Common from './../pages/common/common'
 Vue.use(Router)
@@ -100,6 +101,11 @@ export default new Router({
         path: '/order/detail/',
         name: 'order',
         component: Order
+      },
+      {
+        path: '/user',
+        name: 'user',
+        component: User
       }
       ]
     },

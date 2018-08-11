@@ -3,6 +3,7 @@ import { Form, Input, Icon, Button, Card, Select } from 'ant-design-vue'
 const FormItem = Form.Item
 const Option = Select.Option
 const NormalLoginForm = {
+  name: 'cityForm',
   components: {
     'a-form': Form,
     'a-form-item': FormItem,

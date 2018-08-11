@@ -5,6 +5,7 @@
         bordered
         :columns="columns"
         :dataSource="dataSource"
+        :rowSelection="rowSelection"
         :pagination=false
       />
       <template>
@@ -19,7 +20,8 @@ import axios from './../../axios/index'
 import dataSource from './data'
 
 export default {
-  name: 'cityTable',
+  name: 'userTable',
+  props: ['requestList'],
   components: {
     'a-button': Button,
     'a-table': Table,
@@ -36,7 +38,13 @@ export default {
       columns: dataSource.columns,
       params: {
         page: 1
-      }
+      },
+      requestListFlag: this.requestList
+    }
+  },
+  watch: {
+    requestList () {
+      this.request()
     }
   },
   computed: {
@@ -50,10 +58,8 @@ export default {
           console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
         },
         onSelect: (record, selected, selectedRows, nativeEvent) => {
-          Modal.info({
-            title: '信息',
-            content: `用户名：${record.userName},用户爱好：${record.interest}`
-          })
+          console.log(33, record)
+          this.$emit('receiveTable', record)
         }
       }
     },
@@ -75,14 +81,14 @@ export default {
     // 动态获取mock数据
     request () {
       axios.ajax({
-        url: '/open_city',
+        url: '/table/list1',
         data: {
           params: {
             page: this.params.page
           }
         }
       }).then((res) => {
-        let list = res.result.item_list.map((item, index) => {
+        let list = res.result.list.map((item, index) => {
           item.key = index
           return item
         })
