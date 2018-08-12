@@ -22,9 +22,9 @@
 <script>
 import { Button, Card, Modal } from 'ant-design-vue'
 import axios from './../../axios'
-import UserLogin from './userLogin'
-import UserTable from './userTable'
-import UserForm from './userForm'
+import UserLogin from './UserLoginForm'
+import UserTable from './UserTable'
+import UserForm from './UserForm'
 
 export default {
   name: 'User',

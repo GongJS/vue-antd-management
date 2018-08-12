@@ -6,7 +6,6 @@
     </a-card>
     <city-table></city-table>
     <city-open-form :visible="isShowOpenCity" v-on:hideOpenCity="hideOpenCity"></city-open-form>
-    <a-base-form :formList="formList" v-on:hideOpenCity="hideOpenCity"></a-base-form>
   </div>
 </template>
 
@@ -14,8 +13,7 @@
 import {Card, Button, Modal} from 'ant-design-vue'
 import CityForm from './CityForm'
 import CityTable from './CityTable'
-import CityOpenForm from './cityOpenForm'
-import BaseForm from './../../components/BaseForm/BaseForm'
+import CityOpenForm from './CityOpenForm'
 const formList = [
   {
     type: 'SELECT',
@@ -35,8 +33,7 @@ export default {
     CityOpenForm,
     'a-button': Button,
     'a-card': Card,
-    'a-modal': Modal,
-    'a-base-form': BaseForm
+    'a-modal': Modal
   },
   data () {
     return {

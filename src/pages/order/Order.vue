@@ -2,8 +2,8 @@
   <div>
     <a-order-form></a-order-form>
     <a-card style="margin-top:10px">
-      <a-button @click="openOrderDetail">订单详情</a-button>
-      <a-button @click="handleConfirm">结束订单</a-button>
+      <a-button type="primary" @click="openOrderDetail">订单详情</a-button>
+      <a-button type="primary" @click="handleConfirm">结束订单</a-button>
     </a-card>
     <a-card>
       <a-table
@@ -30,8 +30,8 @@
 <script>
 
 import {Card, Table, Modal, Button, Pagination, message} from 'ant-design-vue'
-import OrderForm from './orderForm'
-import OrderEndForm from './orderEndForm'
+import OrderForm from './OrderForm'
+import OrderEndForm from './OrderEndForm'
 import axios from './../../axios/index'
 import dataSource from './data'
 
@@ -58,9 +58,7 @@ export default {
         page: 1
       },
       visible: false,
-      orderInfo: {
-        bike_sn: '77'
-      }
+      orderInfo: {}
     }
   },
   computed: {

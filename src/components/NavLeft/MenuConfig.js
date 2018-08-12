@@ -11,42 +11,42 @@ const menuList = [
       {
         title: '按钮',
         key: '/ui/buttons',
-        path: '/ui/button'
+        path: '/home/ui/button'
       },
       {
         title: '弹框',
         key: '/ui/modals',
-        path: '/ui/modal'
+        path: '/home/ui/modal'
       },
       {
         title: 'Loading',
         key: '/ui/loadings',
-        path: '/ui/loading'
+        path: '/home/ui/loading'
       },
       {
         title: '通知提醒',
         key: '/ui/notification',
-        path: '/ui/notice'
+        path: '/home/ui/notice'
       },
       {
         title: '全局Message',
         key: '/ui/messages',
-        path: '/ui/message'
+        path: '/home/ui/message'
       },
       {
         title: 'Tab页签',
         key: '/ui/tabs',
-        path: '/ui/tab'
+        path: '/home/ui/tab'
       },
       {
         title: '图片画廊',
         key: '/ui/gallery',
-        path: '/ui/gallery'
+        path: '/home/ui/gallery'
       },
       {
         title: '轮播图',
         key: '/ui/carousel',
-        path: '/ui/carousel'
+        path: '/home/ui/carousel'
       }
     ]
   },
@@ -57,12 +57,12 @@ const menuList = [
       {
         title: '登录',
         key: '/form/login',
-        path: '/form/login'
+        path: '/home/form/login'
       },
       {
         title: '注册',
         key: '/form/reg',
-        path: '/form/register'
+        path: '/home/form/register'
       }
     ]
   },
@@ -73,12 +73,12 @@ const menuList = [
       {
         title: '基础表格',
         key: '/table/basicTable',
-        path: '/table/basicTable'
+        path: '/home/table/basicTable'
       },
       {
         title: '高级表格',
         key: '/table/highTable',
-        path: '/table/hightable'
+        path: '/home/table/hightable'
       }
     ]
   },
@@ -89,27 +89,22 @@ const menuList = [
   {
     title: '城市管理',
     key: '/city',
-    path: '/city'
+    path: '/home/city'
   },
   {
     title: '订单管理',
     key: '/order',
-    children: [
-      {
-        title: '订单详情',
-        key: 'detail',
-        path: '/order/detail'
-      }
-    ]
+    path: '/home/order/detail'
   },
   {
     title: '员工管理',
     key: '/user',
-    path: '/user'
+    path: '/home/user'
   },
   {
     title: '车辆地图',
-    key: '/bikeMap'
+    key: '/bikeMap',
+    path: '/home/bikeMap'
   },
   {
     title: '图标',

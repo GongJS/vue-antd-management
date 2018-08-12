@@ -12,12 +12,13 @@ import Carousel from './../pages/ui/carousel'
 import Gallery from './../pages/ui/gallery'
 import Login from './../pages/form/login'
 import Register from './../pages/form/register'
-import BasicTable from './../pages/table/basicTable'
-import HighTable from './../pages/table/highTable'
-import City from './../pages/city/city'
-import Order from './../pages/order/order'
-import User from './../pages/user/user'
-import Detail from './../pages/order/detail/detail'
+import BasicTable from '../pages/table/BasicTable'
+import HighTable from '../pages/table/HighTable'
+import City from '../pages/city/City'
+import Order from '../pages/order/Order'
+import User from '../pages/user/User'
+import BikeMap from '../pages/map/BikeMap'
+import Detail from '../pages/order/detail/Detail'
 import Common from './../pages/common/common'
 Vue.use(Router)
 
@@ -33,79 +34,84 @@ export default new Router({
         component: Index
       },
       {
-        path: '/ui/button',
+        path: '/home/ui/button',
         name: 'button',
         component: Button
       },
       {
-        path: '/ui/modal',
+        path: '/home/ui/modal',
         name: 'modal',
         component: Modal
       },
       {
-        path: '/ui/message',
+        path: '/home/ui/message',
         name: 'message',
         component: Message
       },
       {
-        path: '/ui/notice',
+        path: '/home/ui/notice',
         name: 'notice',
         component: Notice
       },
       {
-        path: '/ui/loading',
+        path: '/home/ui/loading',
         name: 'loading',
         component: Loading
       },
       {
-        path: '/ui/tab',
+        path: '/home/ui/tab',
         name: 'tab',
         component: Tab
       },
       {
-        path: '/ui/carousel',
+        path: '/home/ui/carousel',
         name: 'carousel',
         component: Carousel
       },
       {
-        path: '/ui/gallery',
+        path: '/home/ui/gallery',
         name: 'gallery',
         component: Gallery
       },
       {
-        path: '/form/login',
+        path: '/home/form/login',
         name: 'login',
         component: Login
       },
       {
-        path: '/form/register',
+        path: '/home/form/register',
         name: 'register',
         component: Register
       },
       {
-        path: '/table/basicTable',
+        path: '/home/table/basicTable',
         name: 'basicTable',
         component: BasicTable
       },
       {
-        path: '/table/highTable',
+        path: '/home/table/highTable',
         name: 'highTable',
         component: HighTable
       },
       {
-        path: '/city',
+        path: '/home/city',
         name: 'city',
         component: City
       },
       {
-        path: '/order/detail/',
+        path: '/home/order/detail/',
         name: 'order',
         component: Order
       },
       {
-        path: '/user',
+        path: '/home/user',
         name: 'user',
         component: User
+      },
+      {
+        path: '/home/bikeMap',
+        name: 'bikeMap',
+        component: BikeMap
       }
       ]
     },

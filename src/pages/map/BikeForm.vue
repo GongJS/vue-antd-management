@@ -1,5 +1,5 @@
 <script>
-import { Form, Input, Button, Card, Select, DatePicker } from 'ant-design-vue'
+import { Form, Button, Card, Select, DatePicker } from 'ant-design-vue'
 const FormItem = Form.Item
 const Option = Select.Option
 const RangePicker = DatePicker.RangePicker
@@ -8,7 +8,6 @@ const NormalLoginForm = {
   components: {
     'a-form': Form,
     'a-form-item': FormItem,
-    'a-input': Input,
     'a-button': Button,
     'a-card': Card,
     'a-select': Select,
@@ -39,18 +38,7 @@ const NormalLoginForm = {
     return (
       <a-card class="card-wrap">
         <a-form id='components-form-demo-normal-register' layout="inline" onSubmit={this.handleSubmit}>
-          <a-form-item label='城市' >
-            {getFieldDecorator('city', {
-              initialValue: '1'
-            })(
-              <a-select style="width:100px;">
-                <a-option value="1">全部</a-option>
-                <a-option value="2">北京</a-option>
-                <a-option value="3">天津</a-option>
-                <a-option value="4">深圳</a-option>
-              </a-select>
-            )}
-          </a-form-item>
+
           <a-form-item label='订单时间：'>
             {getFieldDecorator('mode', {
             })(
@@ -62,7 +50,7 @@ const NormalLoginForm = {
               initialValue: '1'
             })(
               <a-select style="width:100px;">
-                <a-option value="1">进行中</a-option>
+                <a-option value="1">全部</a-option>
                 <a-option value="2">进行中</a-option>
                 <a-option value="3">结束行程</a-option>
               </a-select>

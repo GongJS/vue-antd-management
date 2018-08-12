@@ -2,7 +2,7 @@
 import { Form, Input, Icon, Button, Checkbox, Card, message } from 'ant-design-vue'
 const FormItem = Form.Item
 const NormalLoginForm = {
-  name: 'UserLogin',
+  name: 'UserLoginForm',
   components: {
     'a-form': Form,
     'a-form-item': FormItem,
