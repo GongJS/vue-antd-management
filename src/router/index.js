@@ -1,25 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './../pages/home/Home'
-import Index from './../pages/home/Index'
-import Button from '../pages/ui/buttons'
-import Modal from './../pages/ui/modals'
-import Message from '../pages/ui/messages'
-import Notice from './../pages/ui/notice'
-import Loading from './../pages/ui/loadings'
-import Tab from './../pages/ui/tabs'
-import Carousel from './../pages/ui/carousel'
-import Gallery from './../pages/ui/gallery'
-import Login from './../pages/form/login'
-import Register from './../pages/form/register'
-import BasicTable from '../pages/table/BasicTable'
-import HighTable from '../pages/table/HighTable'
-import City from '../pages/city/City'
-import Order from '../pages/order/Order'
-import User from '../pages/user/User'
-import BikeMap from '../pages/map/BikeMap'
-import Detail from '../pages/order/detail/Detail'
-import Common from './../pages/common/common'
+const Home = resolve => require(['@/pages/home/Home'], resolve)
+const Index = resolve => require(['@/pages/home/Index'], resolve)
+const Button = resolve => require(['@/pages/ui/Buttons'], resolve)
+const Modal = resolve => require(['@/pages/ui/Modals'], resolve)
+const Message = resolve => require(['@/pages/ui/Messages'], resolve)
+const Notice = resolve => require(['@/pages/ui/Notice'], resolve)
+const Loading = resolve => require(['@/pages/ui/Loadings'], resolve)
+const Tab = resolve => require(['@/pages/ui/Tabs'], resolve)
+const Carousel = resolve => require(['@/pages/ui/Carousel'], resolve)
+const Gallery = resolve => require(['@/pages/ui/Gallery'], resolve)
+const Login = resolve => require(['@/pages/form/Login'], resolve)
+const Register = resolve => require(['@/pages/form/Register'], resolve)
+const BasicTable = resolve => require(['@/pages/table/BasicTable'], resolve)
+const HighTable = resolve => require(['@/pages/table/HighTable'], resolve)
+const City = resolve => require(['@/pages/city/City'], resolve)
+const Order = resolve => require(['@/pages/order/Order'], resolve)
+const User = resolve => require(['@/pages/user/User'], resolve)
+const BikeMap = resolve => require(['@/pages/map/BikeMap'], resolve)
+const Rich = resolve => require(['@/pages/rich/Rich'], resolve)
+const Bar = resolve => require(['@/pages/echarts/Bar'], resolve)
+const Line = resolve => require(['@/pages/echarts/Pie'], resolve)
+const Pie = resolve => require(['@/pages/echarts/Line'], resolve)
+const Detail = resolve => require(['@/pages/order/detail/Detail'], resolve)
+const Common = resolve => require(['@/pages/common/common'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -112,6 +116,26 @@ export default new Router({
         path: '/home/bikeMap',
         name: 'bikeMap',
         component: BikeMap
+      },
+      {
+        path: '/home/echarts/bar',
+        name: 'barEcharts',
+        component: Bar
+      },
+      {
+        path: '/home/echarts/line',
+        name: 'lineEcharts',
+        component: Line
+      },
+      {
+        path: '/home/echarts/pie',
+        name: 'pieEcharts',
+        component: Pie
+      },
+      {
+        path: '/home/rich',
+        name: 'rich',
+        component: Rich
       }
       ]
     },

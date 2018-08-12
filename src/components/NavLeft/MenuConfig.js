@@ -84,7 +84,8 @@ const menuList = [
   },
   {
     title: '富文本',
-    key: '/rich'
+    key: '/rich',
+    path: '/home/rich'
   },
   {
     title: '城市管理',
@@ -112,15 +113,18 @@ const menuList = [
     children: [
       {
         title: '柱形图',
-        key: '/charts/bar'
+        key: '/charts/bar',
+        path: '/home/echarts/bar'
       },
       {
         title: '饼图',
-        key: '/charts/pie'
+        key: '/charts/pie',
+        path: '/home/echarts/pie'
       },
       {
         title: '折线图',
-        key: '/charts/line'
+        key: '/charts/line',
+        path: '/home/echarts/line'
       }
     ]
   },

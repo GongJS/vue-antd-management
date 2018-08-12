@@ -4,7 +4,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 const RangePicker = DatePicker.RangePicker
 const NormalLoginForm = {
-  order: 'orderForm',
+  order: 'bikeForm',
   components: {
     'a-form': Form,
     'a-form-item': FormItem,

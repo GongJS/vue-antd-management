@@ -14,7 +14,7 @@ import BikeForm from './BikeForm'
 import axios from './../../axios/index'
 
 export default {
-  name: 'order',
+  name: 'bikeMap',
   components: {
     'a-button': Button,
     'a-card': Card,
