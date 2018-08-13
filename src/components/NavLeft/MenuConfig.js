@@ -108,7 +108,7 @@ const menuList = [
     path: '/home/bikeMap'
   },
   {
-    title: '图标',
+    title: '图表',
     key: '/charts',
     children: [
       {
@@ -130,7 +130,8 @@ const menuList = [
   },
   {
     title: '权限设置',
-    key: '/permission'
+    key: '/permission',
+    path: '/home/permission'
   }
 ]
 export default menuList

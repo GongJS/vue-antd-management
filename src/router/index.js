@@ -24,6 +24,7 @@ const Line = resolve => require(['@/pages/echarts/Pie'], resolve)
 const Pie = resolve => require(['@/pages/echarts/Line'], resolve)
 const Detail = resolve => require(['@/pages/order/detail/Detail'], resolve)
 const Common = resolve => require(['@/pages/common/common'], resolve)
+const Permission = resolve => require(['@/pages/permission/permission'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -136,6 +137,11 @@ export default new Router({
         path: '/home/rich',
         name: 'rich',
         component: Rich
+      },
+      {
+        path: '/home/permission',
+        name: 'permission',
+        component: Permission
       }
       ]
     },

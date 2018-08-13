@@ -1,8 +1,8 @@
 <script>
-import { Form, Button, Select, Modal } from 'ant-design-vue'
+import { Form, Button, Select, Modal, Input } from 'ant-design-vue'
+import Tree from './TreeNodes'
 const FormItem = Form.Item
 const Option = Select.Option
-
 const CollectionCreateForm = Form.create()(
   {
     components: {
@@ -11,70 +11,59 @@ const CollectionCreateForm = Form.create()(
       'a-button': Button,
       'a-select': Select,
       'a-option': Option,
-      'a-modal': Modal
+      'a-modal': Modal,
+      'a-input': Input,
+      'a-tree': Tree
     },
-    props: ['visible'],
+    props: ['visibleSetPermissionForm', 'changeTreeNode'],
     render () {
-      const { visible, form } = this
-      const { getFieldDecorator } = form
+      const { getFieldDecorator } = this.form
+      const { visibleSetPermissionForm, changeTreeNode } = this
+      let listeners = {
+        changeTreeNode: changeTreeNode
+      }
       const formItemLayout = {
         labelCol: {
-          xs: { span: 8 },
+          xs: { span: 4 },
           sm: { span: 4 }
         },
         wrapperCol: {
-          xs: { span: 8 },
-          sm: { span: 8 }
+          xs: { span: 18 },
+          sm: { span: 18 }
         }
       }
       return (
         <a-modal
-          visible={visible}
-          title='开通城市'
+          visible={visibleSetPermissionForm}
+          title='设置权限'
           okText='Create'
           onCancel={() => { this.$emit('cancel') }}
           onOk={() => { this.$emit('create') }}
         >
           <a-form layout='vertical'>
-            <a-form-item
+            <a-form-item class=""
               {...{ props: formItemLayout }}
-              label='选择城市'
-            >
-              {getFieldDecorator('city', {
-                initialValue: '2'
+              label='角色名称:' >
+              {getFieldDecorator('role_name', {
+                initialValue: '客服专员'
               })(
-                <a-select>
-                  <a-option value="1">北京</a-option>
-                  <a-option value="2">天津</a-option>
-                  <a-option value="3">深圳</a-option>
-                </a-select>
+                <a-input disabled></a-input >
               )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
-              label='运营模式'
-            >
-              {getFieldDecorator('op_mode', {
-                initialValue: '2'
+              label='状态:' >
+              {getFieldDecorator('state', {
+                initialValue: '1'
               })(
-                <a-select>
-                  <a-option value="1">加盟</a-option>
-                  <a-option value="2">自营</a-option>
+                <a-select style="width:100px;">
+                  <a-option value="1">启用</a-option>
+                  <a-option value="2">关闭</a-option>
                 </a-select>
               )}
             </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='用车模式'
-            >
-              {getFieldDecorator('mode', {
-                initialValue: '2'
-              })(
-                <a-select>
-                  <a-option value="1">指定停车点</a-option>
-                  <a-option value="2">禁停区</a-option>
-                </a-select>
-              )}
+            <a-form-item>
+              <a-tree {...{on: listeners}}/>
             </a-form-item>
           </a-form>
         </a-modal>
@@ -84,11 +73,16 @@ const CollectionCreateForm = Form.create()(
 )
 
 export default {
-  name: 'CityOpenForm',
-  props: ['visible'],
+  name: 'setPermissionForm',
+  props: ['visibleSetPermissionForm'],
+  data () {
+    return {
+      treeNodeData: []
+    }
+  },
   methods: {
     handleCancel  () {
-      this.$emit('hideOpenCity')
+      this.$emit('hideForm')
     },
     handleCreate  () {
       const form = this.formRef.form
@@ -98,8 +92,11 @@ export default {
         }
         console.log('Received values of form: ', values)
         form.resetFields()
-        this.$emit('hideOpenCity')
+        this.$emit('hideForm')
       })
+    },
+    changeTreeNode (treeNodeData) {
+      this.treeNodeData = treeNodeData
     },
     saveFormRef  (formRef) {
       this.formRef = formRef
@@ -111,9 +108,10 @@ export default {
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.visible}
+          visibleSetPermissionForm={this.visibleSetPermissionForm}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          changeTreeNode={this.changeTreeNode}
         />
       </div>
     )

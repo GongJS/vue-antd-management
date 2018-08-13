@@ -1,5 +1,5 @@
 <script>
-import { Form, Button, Select, Modal } from 'ant-design-vue'
+import { Form, Button, Select, Modal, Input } from 'ant-design-vue'
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -11,25 +11,27 @@ const CollectionCreateForm = Form.create()(
       'a-button': Button,
       'a-select': Select,
       'a-option': Option,
-      'a-modal': Modal
+      'a-modal': Modal,
+      'a-input': Input
     },
-    props: ['visible', 'orderInfo'],
+    props: ['visibleCreatePermissionForm'],
     render () {
-      const { visible, orderInfo } = this
+      const { getFieldDecorator } = this.form
+      const { visibleCreatePermissionForm } = this
       const formItemLayout = {
         labelCol: {
-          xs: { span: 12 },
-          sm: { span: 8 }
+          xs: { span: 6 },
+          sm: { span: 6 }
         },
         wrapperCol: {
-          xs: { span: 12 },
-          sm: { span: 16 }
+          xs: { span: 18 },
+          sm: { span: 18 }
         }
       }
       return (
         <a-modal
-          visible={visible}
-          title='结束订单'
+          visible={visibleCreatePermissionForm}
+          title='创建角色'
           okText='Create'
           onCancel={() => { this.$emit('cancel') }}
           onOk={() => { this.$emit('create') }}
@@ -37,27 +39,24 @@ const CollectionCreateForm = Form.create()(
           <a-form layout='vertical'>
             <a-form-item
               {...{ props: formItemLayout }}
-              label='车辆编号'
-            >
-              <p>{orderInfo.bike_sn}</p>
+              label='角色名称:' >
+              {getFieldDecorator('role_name', {
+                initialValue: ''
+              })(
+                <a-input placeholder="请输入角色名称"></a-input >
+              )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
-              label='剩余电量'
-            >
-              {orderInfo.battery + '%'}
-            </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='行程开始时间'
-            >
-              {orderInfo.start_time}
-            </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='当前位置'
-            >
-              {orderInfo.location}
+              label='状态:' >
+              {getFieldDecorator('state', {
+                initialValue: '1'
+              })(
+                <a-select style="width:100px;">
+                  <a-option value="1">开启</a-option>
+                  <a-option value="2">关闭</a-option>
+                </a-select>
+              )}
             </a-form-item>
           </a-form>
         </a-modal>
@@ -67,11 +66,11 @@ const CollectionCreateForm = Form.create()(
 )
 
 export default {
-  name: 'orderEndForm',
-  props: ['visible', 'orderInfo'],
+  name: 'createPermissionForm',
+  props: ['visibleCreatePermissionForm'],
   methods: {
     handleCancel  () {
-      this.$emit('hideOpenOrder')
+      this.$emit('hideForm')
     },
     handleCreate  () {
       const form = this.formRef.form
@@ -81,7 +80,7 @@ export default {
         }
         console.log('Received values of form: ', values)
         form.resetFields()
-        this.$emit('handleFinishOrder')
+        this.$emit('hideForm')
       })
     },
     saveFormRef  (formRef) {
@@ -94,8 +93,7 @@ export default {
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.visible}
-          orderInfo={this.orderInfo}
+          visibleCreatePermissionForm={this.visibleCreatePermissionForm}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
         />
@@ -104,3 +102,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .ant-form-item-label label {
+    color: rgba(0, 0, 0, 0.85);
+    float: right;
+    line-height: 32px;
+    margin-right: 10px;
+  }
+</stylea>

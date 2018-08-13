@@ -1,5 +1,6 @@
 <script>
-import { Form, Button, Select, Modal } from 'ant-design-vue'
+import { Form, Button, Select, Modal, Input } from 'ant-design-vue'
+import Transfer from './Transfer'
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -11,53 +12,47 @@ const CollectionCreateForm = Form.create()(
       'a-button': Button,
       'a-select': Select,
       'a-option': Option,
-      'a-modal': Modal
+      'a-modal': Modal,
+      'a-input': Input,
+      'a-transfer': Transfer
     },
-    props: ['visible', 'orderInfo'],
+    props: ['visibleAutherPermissionForm', 'changeTransfer'],
     render () {
-      const { visible, orderInfo } = this
+      const { getFieldDecorator } = this.form
+      const { visibleAutherPermissionForm, changeTransfer } = this
+      let listeners = {
+        changeTransfer: changeTransfer
+      }
       const formItemLayout = {
         labelCol: {
-          xs: { span: 12 },
-          sm: { span: 8 }
+          xs: { span: 4 },
+          sm: { span: 4 }
         },
         wrapperCol: {
-          xs: { span: 12 },
+          xs: { span: 18 },
           sm: { span: 16 }
         }
       }
       return (
         <a-modal
-          visible={visible}
-          title='结束订单'
+          visible={visibleAutherPermissionForm}
+          title='用户授权'
           okText='Create'
           onCancel={() => { this.$emit('cancel') }}
           onOk={() => { this.$emit('create') }}
         >
           <a-form layout='vertical'>
-            <a-form-item
+            <a-form-item class=""
               {...{ props: formItemLayout }}
-              label='车辆编号'
-            >
-              <p>{orderInfo.bike_sn}</p>
+              label='角色名称' >
+              {getFieldDecorator('role_name', {
+                initialValue: '管理人员'
+              })(
+                <a-input disabled></a-input >
+              )}
             </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='剩余电量'
-            >
-              {orderInfo.battery + '%'}
-            </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='行程开始时间'
-            >
-              {orderInfo.start_time}
-            </a-form-item>
-            <a-form-item
-              {...{ props: formItemLayout }}
-              label='当前位置'
-            >
-              {orderInfo.location}
+            <a-form-item>
+              <a-transfer {...{on: listeners}}/>
             </a-form-item>
           </a-form>
         </a-modal>
@@ -67,11 +62,23 @@ const CollectionCreateForm = Form.create()(
 )
 
 export default {
-  name: 'orderEndForm',
-  props: ['visible', 'orderInfo'],
+  name: 'autherPermissionForm',
+  props: ['visibleAutherPermissionForm'],
+  data () {
+    return {
+      targetKeys: [],
+      direction: '',
+      moveKeys: []
+    }
+  },
   methods: {
+    changeTransfer (targetKeys, direction, moveKeys) {
+      this.targetKeys = targetKeys
+      this.direction = direction
+      this.moveKeys = moveKeys
+    },
     handleCancel  () {
-      this.$emit('hideOpenOrder')
+      this.$emit('hideForm')
     },
     handleCreate  () {
       const form = this.formRef.form
@@ -94,13 +101,16 @@ export default {
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.visible}
-          orderInfo={this.orderInfo}
+          visibleAutherPermissionForm={this.visibleAutherPermissionForm}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          changeTransfer={this.changeTransfer}
         />
       </div>
     )
   }
 }
 </script>
+<style>
+
+</style>

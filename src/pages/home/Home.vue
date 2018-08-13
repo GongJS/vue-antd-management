@@ -7,7 +7,9 @@
       <a-col :span="20" class="main">
         <Header/>
         <a-row class="content">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view />
+          </keep-alive>
         </a-row>
         <Footer/>
       </a-col>
