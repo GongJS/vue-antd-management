@@ -43,9 +43,9 @@ const CollectionCreateForm = Form.create()(
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
-              label='剩余电量'
+              label='订单编号'
             >
-              {orderInfo.battery + '%'}
+              {orderInfo.order_sn}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
@@ -55,9 +55,9 @@ const CollectionCreateForm = Form.create()(
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
-              label='当前位置'
+              label='行程结束时间'
             >
-              {orderInfo.location}
+              {orderInfo.end_time}
             </a-form-item>
           </a-form>
         </a-modal>

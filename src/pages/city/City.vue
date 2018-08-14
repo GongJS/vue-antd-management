@@ -1,10 +1,10 @@
 <template>
   <div>
-    <city-form></city-form>
+    <city-form v-on:searchCityData="searchCityData"></city-form>
     <a-card style="marginTop:10">
       <a-button type="primary" @click="handleOpenCity">开通城市</a-button>
     </a-card>
-    <city-table></city-table>
+    <city-table :searchParams="searchParams"></city-table>
     <city-open-form :visible="isShowOpenCity" v-on:hideOpenCity="hideOpenCity"></city-open-form>
   </div>
 </template>
@@ -38,7 +38,8 @@ export default {
   data () {
     return {
       isShowOpenCity: false,
-      formList: formList
+      formList: formList,
+      searchParams: {}
     }
   },
   methods: {
@@ -47,6 +48,9 @@ export default {
     },
     hideOpenCity () {
       this.isShowOpenCity = false
+    },
+    searchCityData (data) {
+      this.searchParams = data
     }
   }
 }

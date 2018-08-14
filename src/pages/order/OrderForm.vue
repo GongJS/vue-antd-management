@@ -25,7 +25,7 @@ const NormalLoginForm = {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          this.$emit('searchCityData', values)
         }
       })
     },
@@ -52,13 +52,13 @@ const NormalLoginForm = {
             )}
           </a-form-item>
           <a-form-item label='订单时间：'>
-            {getFieldDecorator('mode', {
+            {getFieldDecorator('order_time', {
             })(
               <a-range-picker></a-range-picker>
             )}
           </a-form-item>
           <a-form-item label='订单状态：'>
-            {getFieldDecorator('op_mode', {
+            {getFieldDecorator('order_status', {
               initialValue: '1'
             })(
               <a-select style="width:100px;">

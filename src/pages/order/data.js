@@ -47,7 +47,5 @@ const columns = [
     dataIndex: 'user_pay'
   }
 ]
-const dataSource = {
-  columns
-}
-export default dataSource
+
+export default columns

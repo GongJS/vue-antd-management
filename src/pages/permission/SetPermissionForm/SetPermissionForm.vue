@@ -74,7 +74,7 @@ const CollectionCreateForm = Form.create()(
 
 export default {
   name: 'setPermissionForm',
-  props: ['visibleSetPermissionForm'],
+  props: ['visibleSetPermissionForm', 'orderInfo'],
   data () {
     return {
       treeNodeData: []

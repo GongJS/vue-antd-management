@@ -6,7 +6,7 @@
       <a-button type="primary" @click="handleAutherPermission">用户授权</a-button>
     </a-card>
     <a-card>
-      <a-permission-table></a-permission-table>
+      <a-permission-table v-on:selecteRecord="selecteRecord"></a-permission-table>
     </a-card>
     <a-create-permission-form
       :visibleCreatePermissionForm="visibleCreatePermissionForm"
@@ -15,6 +15,7 @@
     </a-create-permission-form>
     <a-set-permission-form
       :visibleSetPermissionForm="visibleSetPermissionForm"
+      :orderInfo="orderInfo"
       v-on:hideForm="hideForm"
     >
     </a-set-permission-form>
@@ -57,10 +58,20 @@ export default {
 
   },
   methods: {
+    selecteRecord (data) {
+      this.orderInfo = data
+    },
     handleCreatePermission () {
       this.visibleCreatePermissionForm = true
     },
     handleSetPermission () {
+      if (!this.orderInfo.id) {
+        Modal.info({
+          title: '信息',
+          content: '请先选择一个用户'
+        })
+        return
+      }
       this.visibleSetPermissionForm = true
     },
     handleAutherPermission () {

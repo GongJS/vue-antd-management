@@ -14,12 +14,13 @@
   </div>
 </template>
 <script>
-import {Card, Table, Modal, Button, message, Pagination} from 'ant-design-vue'
+import {Card, Table, Modal, Button, Pagination} from 'ant-design-vue'
 import axios from './../../axios/index'
-import dataSource from './data'
+import columns from './data'
 
 export default {
   name: 'cityTable',
+  props: ['searchParams'],
   components: {
     'a-button': Button,
     'a-table': Table,
@@ -30,79 +31,28 @@ export default {
   data () {
     return {
       dataSource: [],
-      selectedRows: [],
-      selectedRowKeys: [],
       pagination: {},
-      columns: dataSource.columns,
+      columns: columns,
       params: {
-        page: 1
+        page: 1,
+        city_id: '',
+        mode: '',
+        op_mode: '',
+        auth_status: ''
       }
     }
   },
-  computed: {
-    rowSelection () {
+  watch: {
+    searchParams: function () {
       let _this = this
-      return {
-        type: 'radio',
-        onChange: (selectedRowKeys, selectedRows) => {
-          _this.selectedRowKeys = selectedRowKeys
-          _this.selectedRows = selectedRows
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-        },
-        onSelect: (record, selected, selectedRows, nativeEvent) => {
-          Modal.info({
-            title: '信息',
-            content: `用户名：${record.userName},用户爱好：${record.interest}`
-          })
-        }
-      }
-    },
-    rowCheckSelection () {
-      let _this = this
-      return {
-        type: 'checkbox',
-        onChange: (selectedRowKeys, selectedRows) => {
-          _this.selectedRowKeys = selectedRowKeys
-          _this.selectedRows = selectedRows
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-        },
-        onSelect: (record, selected, selectedRows, nativeEvent) => {
-        }
-      }
+      axios.requestList(_this, '/open_city', this.searchParams, true)
     }
   },
   methods: {
     // 动态获取mock数据
     request () {
-      axios.ajax({
-        url: '/open_city',
-        data: {
-          params: {
-            page: this.params.page
-          }
-        }
-      }).then((res) => {
-        let list = res.result.item_list.map((item, index) => {
-          item.key = index
-          return item
-        })
-        this.dataSource = list
-      })
-    },
-    handleDelete () {
-      let rows = this.selectedRows
-      let ids = []
-      rows.map((item) => {
-        ids.push(item.id)
-      })
-      Modal.confirm({
-        title: '删除提示',
-        content: `您确定要删除这些数据吗？${ids.join(',')}`,
-        onOk: () => {
-          message.success('删除成功')
-          this.request()
-        }
-      })
+      let _this = this
+      axios.requestList(_this, '/open_city', this.params, true)
     },
     onChangePage (pageNumber) {
       this.params.page = pageNumber

@@ -1,6 +1,7 @@
 <script>
-import { Form, Button, Select, Modal, Input, Radio, DatePicker } from 'ant-design-vue'
+import { Form, Button, Select, Modal, Input, Radio, DatePicker, message } from 'ant-design-vue'
 import moment from 'moment'
+import axios from './../../axios'
 const FormItem = Form.Item
 const Option = Select.Option
 const RadioGroup = Radio.Group
@@ -52,64 +53,70 @@ const CollectionCreateForm = Form.create()(
               {...{ props: formItemLayout }}
               label='用户名:'
             >
-              {getFieldDecorator('username', {
-                initialValue: userInfo.username,
-                rules: [{
-                  type: 'string', message: '该用户名有效'
-                }, {
-                  required: true, message: '用户名不能为空'
-                }]
-              })(
-                <a-input placeholder="请输入用户名" />
-              )}
+              {title === '用户详情' ? userInfo.username
+                : getFieldDecorator('username', {
+                  initialValue: userInfo.username,
+                  rules: [{
+                    type: 'string', message: '该用户名有效'
+                  }, {
+                    required: true, message: '用户名不能为空'
+                  }]
+                })(
+                  <a-input placeholder="请输入用户名" />
+                )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='性别：'
             >
-              {getFieldDecorator('sex', {
-                initialValue: `${userInfo.sex}`
-              })(
-                <a-radio-group>
-                  <a-radio value="1">男</a-radio>
-                  <a-radio value="2">女</a-radio>
-                </a-radio-group>
-              )}
+              {
+                title === '用户详情' ? <p> {userInfo.sex === '1' ? '男' : '女'} </p>
+                  : getFieldDecorator('sex', {
+                    initialValue: `${userInfo.sex}`
+                  })(
+                    <a-radio-group>
+                      <a-radio value="1">男</a-radio>
+                      <a-radio value="2">女</a-radio>
+                    </a-radio-group>
+                  )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='状态'
             >
-              {getFieldDecorator('state', {
-                initialValue: `${userInfo.state}`
-              })(
-                <a-select>
-                  <a-option value="1">咸鱼一条</a-option>
-                  <a-option value="2">风华浪子</a-option>
-                  <a-option value="3">北大才子一枚</a-option>
-                  <a-option value="4">百度FE</a-option>
-                  <a-option value="5">创业者</a-option>
-                </a-select>
-              )}
+              { title === '用户详情' ? userInfo.state
+                : getFieldDecorator('state', {
+                  initialValue: `${userInfo.state}`
+                })(
+                  <a-select>
+                    <a-option value="1">咸鱼一条</a-option>
+                    <a-option value="2">风华浪子</a-option>
+                    <a-option value="3">北大才子一枚</a-option>
+                    <a-option value="4">百度FE</a-option>
+                    <a-option value="5">创业者</a-option>
+                  </a-select>
+                )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='生日：'
             >
-              {getFieldDecorator('birthday', {
-                initialValue: moment(`${userInfo.birthday}`)
-              })(
-                <a-date-picker
-                  showTime
-                  format="YYYY-MM-DD"
-                />
-              )}
+              { title === '用户详情' ? userInfo.birthday
+                : getFieldDecorator('birthday', {
+                  initialValue: moment(`${userInfo.birthday}`)
+                })(
+                  <a-date-picker
+                    showTime
+                    format="YYYY-MM-DD"
+                  />
+                )}
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='联系地址'
             >
-              {getFieldDecorator('address', {
+              {title === '用户详情' ? userInfo.address
+                :getFieldDecorator('address', {
                 initialValue: `${userInfo.address}`
               })(
                 <a-text-area autosize={rowObject}/>
@@ -138,8 +145,21 @@ export default {
           return
         }
         console.log('Received values of form: ', values)
-        form.resetFields()
-        this.$emit('hideForm', 'update')
+        axios.ajax({
+          url: this.title === '创建员工' ? '/user/add' : '/user/edit',
+          data: {
+            params: {
+              ...values
+            }
+          }
+        }).then((res) => {
+          // eslint-disable-next-line
+          if (res.code == 0) {
+            message.sucess('提交成功')
+            form.resetFields()
+            this.$emit('hideForm', values)
+          }
+        })
       })
     },
     saveFormRef  (formRef) {

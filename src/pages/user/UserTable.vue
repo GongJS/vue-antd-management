@@ -58,21 +58,7 @@ export default {
           console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
         },
         onSelect: (record, selected, selectedRows, nativeEvent) => {
-          console.log(33, record)
           this.$emit('receiveTable', record)
-        }
-      }
-    },
-    rowCheckSelection () {
-      let _this = this
-      return {
-        type: 'checkbox',
-        onChange: (selectedRowKeys, selectedRows) => {
-          _this.selectedRowKeys = selectedRowKeys
-          _this.selectedRows = selectedRows
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-        },
-        onSelect: (record, selected, selectedRows, nativeEvent) => {
         }
       }
     }

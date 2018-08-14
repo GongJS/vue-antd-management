@@ -18,7 +18,7 @@ const NormalLoginForm = {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          message.success(`${values.userName} 恭喜你，您通过本次表单组件学习，当前密码为：${values.password}`)
+          message.success(`${values.userName} 恭喜你，登录成功，当前密码为：${values.password}`)
         }
       })
     }

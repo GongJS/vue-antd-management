@@ -50,7 +50,4 @@ const columns = [
     dataIndex: 'sys_user_name'
   }
 ]
-const dataSource = {
-  columns
-}
-export default dataSource
+export default columns

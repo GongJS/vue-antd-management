@@ -30,7 +30,5 @@ const columns = [
     dataIndex: 'authorize_user_name'
   }
 ]
-const dataSource = {
-  columns
-}
-export default dataSource
+
+export default columns
