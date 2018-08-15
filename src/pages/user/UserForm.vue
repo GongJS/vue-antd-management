@@ -116,11 +116,11 @@ const CollectionCreateForm = Form.create()(
               label='联系地址'
             >
               {title === '用户详情' ? userInfo.address
-                :getFieldDecorator('address', {
-                initialValue: `${userInfo.address}`
-              })(
-                <a-text-area autosize={rowObject}/>
-              )}
+                : getFieldDecorator('address', {
+                  initialValue: `${userInfo.address}`
+                })(
+                  <a-text-area autosize={rowObject}/>
+                )}
             </a-form-item>
           </a-form>
         </a-modal>
