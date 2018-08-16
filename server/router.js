@@ -1,7 +1,8 @@
-const router = require('koa-router')()
-const UserController = require('./controller/user')
-module.exports = (app) => {
-  router.get( '/login', HomeController.login )
+import KoaRouter from 'koa-router'
+import UserController from './controller/user.js'
+const router = KoaRouter()
+export default function (app) {
+  router.get('/login/:id', UserController.login)
   app.use(router.routes())
     .use(router.allowedMethods())
 }

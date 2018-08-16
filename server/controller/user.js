@@ -1,8 +1,10 @@
-const auth = require('./user.js');
-const user = require('../models/user.js');
-module.exports = {
-  login: async(ctx, next) => {
-    const result = await user.getUserById(ctx.params.id)
-    ctx.response.body = result
-  }
+import user from '../models/user.js'
+
+const login = async function (ctx, next) {
+  const result = await user.getUserById(ctx.params.id)
+  ctx.response.body = result
+}
+
+export default {
+  login
 }

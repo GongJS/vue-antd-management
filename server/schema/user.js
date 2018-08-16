@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+export default function (sequelize, DataTypes) {
   return sequelize.define('user', {
     id: {
       type: DataTypes.INTEGER(11), // 字段类型
@@ -16,5 +16,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'user' // 表名
-  });
+  })
 };
