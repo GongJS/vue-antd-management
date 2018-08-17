@@ -1,6 +1,5 @@
 import JsonP from 'jsonp'
 import axios from 'axios'
-
 export default class Axios {
   static jsonp (options) {
     return new Promise((resolve, reject) => {
@@ -17,7 +16,6 @@ export default class Axios {
       })
     })
   }
-
   static requestList (_this, url, params, isMock) {
     var data = {
       params,

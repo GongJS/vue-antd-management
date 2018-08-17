@@ -1,5 +1,6 @@
 <script>
 import { Form, Input, Icon, Button, Checkbox, Card, message } from 'ant-design-vue'
+import axios from '../../axios/index'
 const FormItem = Form.Item
 const NormalLoginForm = {
   components: {
@@ -18,6 +19,7 @@ const NormalLoginForm = {
       this.form.validateFields((err, values) => {
         if (!err) {
           message.success(`${values.userName} 恭喜你，您通过本次表单组件学习，当前密码为：${values.password}`)
+          axios.login()
         }
       })
     }

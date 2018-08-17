@@ -10,7 +10,7 @@ const Loading = resolve => require(['@/pages/ui/Loadings'], resolve)
 const Tab = resolve => require(['@/pages/ui/Tabs'], resolve)
 const Carousel = resolve => require(['@/pages/ui/Carousel'], resolve)
 const Gallery = resolve => require(['@/pages/ui/Gallery'], resolve)
-const Login = resolve => require(['@/pages/form/Login'], resolve)
+const LoginForm = resolve => require(['@/pages/form/Login'], resolve)
 const Register = resolve => require(['@/pages/form/Register'], resolve)
 const BasicTable = resolve => require(['@/pages/table/BasicTable'], resolve)
 const HighTable = resolve => require(['@/pages/table/HighTable'], resolve)
@@ -24,6 +24,7 @@ const Line = resolve => require(['@/pages/echarts/Pie'], resolve)
 const Pie = resolve => require(['@/pages/echarts/Line'], resolve)
 const Detail = resolve => require(['@/pages/order/detail/Detail'], resolve)
 const Common = resolve => require(['@/pages/common/common'], resolve)
+const Login = resolve => require(['@/pages/login/Login'], resolve)
 const Permission = resolve => require(['@/pages/permission/permission'], resolve)
 Vue.use(Router)
 
@@ -80,8 +81,8 @@ export default new Router({
       },
       {
         path: '/home/form/login',
-        name: 'login',
-        component: Login
+        name: 'loginForm',
+        component: LoginForm
       },
       {
         path: '/home/form/register',
@@ -153,6 +154,11 @@ export default new Router({
         name: 'orderDetail',
         component: Detail
       }]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

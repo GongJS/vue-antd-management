@@ -15,6 +15,7 @@ const getUserById = async function (id) { // 注意是async function 而不是fu
 
 // 通过用户名查找
 const getUserByName = async function (name) {
+  console.log(666, name)
   const userInfo = await User.findOne({
     where: {
       user_name: name
