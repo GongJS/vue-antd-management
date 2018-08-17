@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs'
 
 const login = async function (ctx, next) {
   const data = ctx.request.body
-  console.log(33, data)
   const userInfo = await user.getUserByName(data.user_name)
   if (userInfo != null) { // 如果查无此用户会返回null
     if (!bcrypt.compareSync(data.password, userInfo.dataValues.password)) { // 验证密码是否正确

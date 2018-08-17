@@ -1,7 +1,7 @@
 <template>
   <div>
     <city-form v-on:searchCityData="searchCityData"></city-form>
-    <a-card style="marginTop:10">
+    <a-card style="margin-top:10px;">
       <a-button type="primary" @click="handleOpenCity">开通城市</a-button>
     </a-card>
     <city-table :searchParams="searchParams"></city-table>
@@ -10,10 +10,11 @@
 </template>
 
 <script>
-import {Card, Button, Modal} from 'ant-design-vue'
+import {Card, Button} from 'ant-design-vue'
 import CityForm from './CityForm'
 import CityTable from './CityTable'
 import CityOpenForm from './CityOpenForm'
+import { mapState } from 'vuex'
 const formList = [
   {
     type: 'SELECT',
@@ -32,8 +33,7 @@ export default {
     CityForm,
     CityOpenForm,
     'a-button': Button,
-    'a-card': Card,
-    'a-modal': Modal
+    'a-card': Card
   },
   data () {
     return {
@@ -41,6 +41,11 @@ export default {
       formList: formList,
       searchParams: {}
     }
+  },
+  computed: {
+    ...mapState({
+      isLogin: state => state.isLogin
+    })
   },
   methods: {
     handleOpenCity () {

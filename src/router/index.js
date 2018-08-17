@@ -102,17 +102,20 @@ export default new Router({
       {
         path: '/home/city',
         name: 'city',
-        component: City
+        component: City,
+        meta: {requiresAuth: true}
       },
       {
         path: '/home/order/detail/',
         name: 'order',
-        component: Order
+        component: Order,
+        meta: {requiresAuth: true}
       },
       {
         path: '/home/user',
         name: 'user',
-        component: User
+        component: User,
+        meta: {requiresAuth: true}
       },
       {
         path: '/home/bikeMap',
@@ -142,7 +145,8 @@ export default new Router({
       {
         path: '/home/permission',
         name: 'permission',
-        component: Permission
+        component: Permission,
+        meta: {requiresAuth: true}
       }
       ]
     },

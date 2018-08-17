@@ -8,7 +8,7 @@
     <div class="main">
       <form class="form-1">
         <p class="field">
-          <input type="text" name="login" v-model="name" placeholder="Username or email">
+          <input type="text" name="login" v-model="userName" placeholder="Username or email">
           <i class="iconfont icon-yonghu"></i>
         </p>
         <p class="field">
@@ -28,24 +28,35 @@
 <script>
 import axios from 'axios'
 import {message} from 'ant-design-vue'
+import { mapState } from 'vuex'
 export default {
   name: 'login',
   data () {
     return {
-      name: '',
+      userName: '',
       password: ''
     }
   },
+  computed: {
+    ...mapState({
+      isLogin: state => state.isLogin
+    })
+  },
   methods: {
     handleSubmit () {
+      if (this.isLogin === true) {
+        message.info('你已经登录过了')
+        return
+      }
       let obj = {
-        user_name: this.name,
+        user_name: this.userName,
         password: this.password
       }
       /* eslint handle-callback-err: "error" */
       axios.post('/user/login', obj) // 将信息发送给后端
         .then((res) => { // axios返回的数据都在res.data里
           if (res.data.success) { // 如果成功
+            this.$store.commit('login', this.userName)
             sessionStorage.setItem('demo-token', res.data.token) // 用sessionStorage把token存下来
             message.success('登录成功')
             this.$router.push('/home')

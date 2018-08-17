@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="logo">
-            <img src="./../../assets/logo-ant.svg" alt="" />
+            <img src="./../../../static/logo-ant.svg" alt="" />
             <h1>Vue-Antd</h1>
         </div>
             <menu-list :menuList="menuList"></menu-list>
