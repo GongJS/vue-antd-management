@@ -1369,6 +1369,12 @@ caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.300008
   version "1.0.30000874"
   resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000874.tgz#a641b1f1c420d58d9b132920ef6ba87bbdcd2223"
 
+canvas-nest.js@^2.0.2:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/canvas-nest.js/download/canvas-nest.js-2.0.2.tgz#1afb5ee9afa5d30f037662a60fdcf66a79189bc2"
+  dependencies:
+    size-sensor "^0.2.0"
+
 caseless@~0.12.0:
   version "0.12.0"
   resolved "http://registry.npm.taobao.org/caseless/download/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
@@ -6080,6 +6086,10 @@ shimmer@1.1.0:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "http://registry.npm.taobao.org/signal-exit/download/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+size-sensor@^0.2.0:
+  version "0.2.0"
+  resolved "http://registry.npm.taobao.org/size-sensor/download/size-sensor-0.2.0.tgz#f929368b025b0e69013f30fa24dd473008885eb3"
 
 slash@^1.0.0:
   version "1.0.0"
