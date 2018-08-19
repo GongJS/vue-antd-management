@@ -12,7 +12,7 @@ export default {
       default () {
         return {
           color: '255,0,0',
-          count: 88
+          count: 99
         }
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="index-wrap">
      <div class="title">
-       <p>欢迎来到Vue-antd管理系统</p>
+       <p>欢迎使用Vue-antd管理系统</p>
        <p style="font-size: 30px; color:#f3b7b7;">Author: redell</p>
        <p style="font-size: 30px;"><a style="color:#f3b7b7;" href="https://github.com/GongJS/vue-antd-management">Github: GongJS</a></p>
      </div>

@@ -16,6 +16,27 @@ export default class Axios {
       })
     })
   }
+
+  static getData (self, options, params) {
+    let loading
+    let axios = self
+    if (options.isShowLoading !== false) {
+      loading = document.getElementById('ajaxLoading')
+      loading.style.display = 'block'
+    }
+    console.log(222, this)
+    return new Promise((resolve, reject) => {
+      console.log(333, this)
+      axios[options.method](options.url, params).then(res => {
+        loading.style.display = 'none'
+        if (res.data.success === true) {
+          resolve(res.data.result)
+        } else {
+          reject(res)
+        }
+      })
+    })
+  }
   static requestList (_this, url, params, isMock) {
     var data = {
       params,
@@ -30,6 +51,34 @@ export default class Axios {
         return item
       })
       _this.dataSource = list
+    })
+  }
+
+  static get (options) {
+    let loading
+    if (options.isShowLoading !== false) {
+      loading = document.getElementById('ajaxLoading')
+      loading.style.display = 'block'
+    }
+    return new Promise((resolve, reject) => {
+      axios({
+        url: options.url,
+        method: 'post',
+        timeout: 5000,
+        params: {}
+      }).then((response) => {
+        loading.style.display = 'none'
+        if (response.status === 200) {
+          let res = response.data
+          // eslint-disable-next-line
+          if (res.code == 0) {
+            resolve(res)
+          } else {
+          }
+        } else {
+          reject(response.data)
+        }
+      })
     })
   }
 

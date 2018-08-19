@@ -1,59 +1,33 @@
 <template>
   <div>
     <a-card title="基础表格">
-      <a-table
-        bordered
-        :columns="columns"
-        :dataSource="dataSource"
-        :pagination=false
-      />
+      <a-table bordered :columns="columns" :dataSource="dataSource" :pagination=false />
     </a-card>
-    <a-card title="动态数据渲染表格-Mock" style="margin:10px 0">
-    <a-table
-      bordered
-      :columns="columns"
-      :dataSource= "dataSource2"
-      :pagination=false
-    />
+    <a-card title="动态数据渲染表格" style="margin:10px 0">
+      <a-table bordered :columns="columns" :dataSource="dataSource2" :pagination=false />
     </a-card>
-    <a-card title="Mock-单选" style="margin: 10px 0">
-    <a-table
-      bordered
-      :columns="columns"
-      :dataSource="dataSource2"
-      :pagination=false
-      :rowSelection="rowSelection"
-    />
+    <a-card title="单选" style="margin: 10px 0">
+      <a-table bordered :columns="columns" :dataSource="dataSource2" :pagination=false :rowSelection="rowSelection" />
     </a-card>
-    <a-card title="Mock-删除" style="margin:10px 0">
-    <div style="margin-bottom:10px">
-      <a-button @click="handleDelete">删除</a-button>
-    </div>
-    <a-table
-      bordered
-      :rowSelection="rowCheckSelection"
-      :columns="columns"
-      :dataSource="dataSource2"
-      :pagination=false
-    />
+    <a-card title="删除" style="margin:10px 0">
+      <div style="margin-bottom:10px">
+        <a-button @click="handleDelete">删除</a-button>
+      </div>
+      <a-table bordered :rowSelection="rowCheckSelection" :columns="columns" :dataSource="dataSource2" :pagination=false />
     </a-card>
-    <a-card title="Mock-表格分页" style="margin:10px 0">
-    <a-table
-      bordered
-      :columns=columns
-      :dataSource="dataSource2"
-      :pagination=false
-    />
+    <a-card title="表格分页" style="margin:10px 0">
+      <a-table bordered :columns=columns :dataSource="dataSource2" :pagination=false />
       <template>
-        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="500" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"/>
+        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="total" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"
+        />
       </template>
     </a-card>
   </div>
-  </template>
+</template>
 <script>
-import {Card, Table, Modal, Button, message, Pagination} from 'ant-design-vue'
-import axios from './../../axios/index'
+import { Card, Table, Modal, Button, message, Pagination } from 'ant-design-vue'
 import dataSource from './data'
+import axios from '@/axios/'
 
 export default {
   name: 'BasicTable',
@@ -72,6 +46,7 @@ export default {
       selectedRowKeys: [],
       pagination: {},
       columns: dataSource.columns,
+      total: Number,
       params: {
         page: 1
       }
@@ -110,25 +85,23 @@ export default {
     }
   },
   methods: {
-    // 动态获取mock数据
-    request () {
-      axios.ajax({
-        url: '/table/list',
-        data: {
-          params: {
-            page: this.params.page
-          }
-        }
-      }).then((res) => {
-        if (res.code === 0) {
-          res.result.list.map((item, index) => {
-            item.key = index
-          })
-          this.dataSource2 = res.result.list
-          this.selectedRowKeys = []
-          this.selectedRows = null
-        }
+    // 动态获取数据
+    async request () {
+      let self = this.$http
+      let options = {
+        url: '/api/getBasictable',
+        method: 'post'
+      }
+      let params = {
+        page: this.params.page,
+        pageSize: 10
+      }
+      const result = await axios.getData(self, options, params)
+      result.rows.map((item, index) => {
+        item.key = index
       })
+      this.total = result.count
+      this.dataSource2 = result.rows
     },
     handleDelete () {
       let rows = this.selectedRows
@@ -151,11 +124,13 @@ export default {
     }
   },
   mounted () {
+    // 获取静态数据
     const data = dataSource.data
     data.map((item, index) => {
       item.key = index
     })
     this.dataSource = data
+    // 从后台获取动态数据
     this.request()
   }
 }
