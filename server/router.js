@@ -6,6 +6,7 @@ const router = KoaRouter()
 export default function (app) {
   router.post('/user/login/', UserController.login)
   router.post('/api/getBasictable', jwt({secret: 'vue-koa-demo'}), BasicTableController.getBasicTable)
+  router.post('/api/deleteBasictable', jwt({secret: 'vue-koa-demo'}), BasicTableController.deleteBasicTable)
   app.use(router.routes())
     .use(router.allowedMethods())
 }

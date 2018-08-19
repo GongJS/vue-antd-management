@@ -46,7 +46,7 @@ export default {
       selectedRowKeys: [],
       pagination: {},
       columns: dataSource.columns,
-      total: Number,
+      total: null,
       params: {
         page: 1
       }
@@ -104,6 +104,7 @@ export default {
       this.dataSource2 = result.rows
     },
     handleDelete () {
+      let _this = this
       let rows = this.selectedRows
       let ids = []
       rows.map((item) => {
@@ -112,9 +113,22 @@ export default {
       Modal.confirm({
         title: '删除提示',
         content: `您确定要删除这些数据吗？${ids.join(',')}`,
-        onOk: () => {
-          message.success('删除成功')
-          this.request()
+        onOk: async () => {
+          console.log('ids', ids)
+          let self = _this.$http
+          let options = {
+            url: '/api/deleteBasictable',
+            method: 'post'
+          }
+          let params = {
+            id: ids
+          }
+          const result = await axios.getData(self, options, params)
+          if (result === '删除成功') {
+            message.info('删除成功')
+          } else {
+            message.info('删除失败')
+          }
         }
       })
     },
