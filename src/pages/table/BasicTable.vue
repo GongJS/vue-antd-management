@@ -48,7 +48,8 @@ export default {
       columns: dataSource.columns,
       total: null,
       params: {
-        page: 1
+        page: 1,
+        pageSize: 10
       }
     }
   },
@@ -92,10 +93,7 @@ export default {
         url: '/api/getBasictable',
         method: 'post'
       }
-      let params = {
-        page: this.params.page,
-        pageSize: 10
-      }
+      let params = this.params
       const result = await axios.getData(self, options, params)
       result.rows.map((item, index) => {
         item.key = index

@@ -1,9 +1,8 @@
 import basicTable from '../models/basicTable'
 
 const getBasicTable = async function (ctx, next) {
-  console.log(777, ctx)
   const data = ctx.request.body
-  const result = await basicTable.getbasicTable(data)
+  const result = await basicTable.getBasicTable(data)
   if (result !== null) {
     ctx.response.body = {
       success: true,
@@ -19,7 +18,7 @@ const getBasicTable = async function (ctx, next) {
 
 const deleteBasicTable = async function (ctx, next) {
   const data = ctx.request.body
-  const result = await basicTable.deletebasicTable(data)
+  const result = await basicTable.deleteBasicTable(data)
   if (result > 0) {
     ctx.response.body = {
       success: true,

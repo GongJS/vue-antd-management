@@ -51,8 +51,13 @@ export default {
     handleOpenCity () {
       this.isShowOpenCity = true
     },
-    hideOpenCity () {
+    hideOpenCity (data) {
       this.isShowOpenCity = false
+      if (data === 'update') {
+        this.searchParams = {
+          status: 'update'
+        }
+      }
     },
     searchCityData (data) {
       this.searchParams = data
