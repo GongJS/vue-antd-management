@@ -1,7 +1,14 @@
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 const columns = [
   {
     title: '订单编号',
     dataIndex: 'order_sn'
+  },
+  {
+    title: '城市',
+    dataIndex: 'city'
   },
   {
     title: '车辆编号',
@@ -32,19 +39,18 @@ const columns = [
   },
   {
     title: '开始时间',
-    dataIndex: 'start_time'
+    dataIndex: 'start_time',
+    customRender (dataTime) {
+      return moment(dataTime).utcOffset(-0).format('YYYY-MM-DD HH:mm:ss')
+    }
   },
   {
     title: '结束时间',
     dataIndex: 'end_time'
   },
   {
-    title: '订单金额',
+    title: '订单金额(元)',
     dataIndex: 'total_fee'
-  },
-  {
-    title: '实付金额',
-    dataIndex: 'user_pay'
   }
 ]
 

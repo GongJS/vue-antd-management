@@ -9,7 +9,7 @@
         :pagination=false
       />
       <template>
-        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="500" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"/>
+        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="total" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"/>
       </template>
     </a-card>
   </div>
@@ -17,7 +17,7 @@
 <script>
 
 import {Card, Table, Modal, Pagination} from 'ant-design-vue'
-import axios from './../../axios/index'
+import axios from '@/axios/'
 import columns from './data'
 
 export default {
@@ -36,19 +36,44 @@ export default {
       selectedRowKeys: [],
       pagination: {},
       columns: columns,
+      total: null,
       params: {
-        city_id: '',
-        order_status: '',
-        order_time: '',
-        page: 1
+        page: 1,
+        pageSize: 10
       },
       orderInfo: {}
     }
   },
   watch: {
-    searchParams: function () {
-      let _this = this
-      axios.requestList(_this, '/order/list', this.searchParams, true)
+    searchParams: async function () {
+      let self = this.$http
+      let params
+      let options
+      // 如果是新建完数据，就从数据库重新获取全部数据(不带参数查询)
+      if (this.searchParams.status === 'update') {
+        params = this.params
+        options = {
+          url: '/api/getOrderTable',
+          method: 'post'
+        }
+      } else {
+      // 带参数查询
+        params = {
+          city: this.searchParams.city,
+          order_time: this.searchParams.order_time,
+          status: this.searchParams.status
+        }
+        options = {
+          url: '/api/searchOrderTable',
+          method: 'post'
+        }
+      }
+      const result = await axios.getData(self, options, params)
+      result.rows.map((item, index) => {
+        item.key = index
+      })
+      this.total = result.count
+      this.dataSource = result.rows
     }
   },
   computed: {
@@ -69,10 +94,20 @@ export default {
     }
   },
   methods: {
-    // 动态获取mock数据
-    request () {
-      let _this = this
-      axios.requestList(_this, '/order/list', this.params, true)
+    // 动态获取数据
+    async request () {
+      let self = this.$http
+      let options = {
+        url: '/api/getOrderTable',
+        method: 'post'
+      }
+      let params = this.params
+      const result = await axios.getData(self, options, params)
+      result.rows.map((item, index) => {
+        item.key = index
+      })
+      this.total = result.count
+      this.dataSource = result.rows
     },
     hideOpenOrder () {
       this.visible = false

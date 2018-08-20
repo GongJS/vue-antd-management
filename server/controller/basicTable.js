@@ -1,5 +1,4 @@
 import basicTable from '../models/basicTable'
-
 const getBasicTable = async function (ctx, next) {
   const data = ctx.request.body
   const result = await basicTable.getBasicTable(data)

@@ -1,5 +1,5 @@
 <script>
-import { Form, Button, Select, Modal } from 'ant-design-vue'
+import { Form, Button, Select, Modal, message } from 'ant-design-vue'
 import axios from '@/axios/'
 const FormItem = Form.Item
 const Option = Select.Option
@@ -108,6 +108,9 @@ export default {
           op_mode: values.op_mode
         }
         const result = await axios.getData(self, options, params)
+        if (result.id) {
+          message.info('创建成功')
+        }
         form.resetFields()
         this.$emit('hideOpenCity', 'update')
       })
