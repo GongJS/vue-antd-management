@@ -18,11 +18,11 @@
 </template>
 <script>
 
-import {Card, Table, Modal, Button, Pagination} from 'ant-design-vue'
+import {Card, Table, Modal, Button, Pagination, message} from 'ant-design-vue'
 import OrderForm from './OrderForm'
 import OrderEndForm from './OrderEndForm'
 import Ordertable from './OrderTable'
-import axios from './../../axios/index'
+import axios from '@/axios/'
 
 export default {
   name: 'order',
@@ -42,12 +42,7 @@ export default {
       pagination: {},
       visible: false,
       orderInfo: {},
-      searchParams: {
-        city_id: '',
-        order_status: '',
-        order_time: '',
-        page: 1
-      }
+      searchParams: {}
     }
   },
   methods: {
@@ -66,7 +61,7 @@ export default {
         })
         return
       }
-      window.open(`/#/common/order/detail/${item.id}`, '_blank')
+      window.open(`/#/common/order/detail/${item.order_sn}`, '_blank')
     },
     // 订单结束确认
     handleConfirm () {
@@ -76,15 +71,38 @@ export default {
           title: '信息',
           content: '请选择一条订单进行结束'
         })
-      } else {
-        this.orderInfo = item
-        this.visible = true
+        return
       }
+      if (item.status === '结束行程') {
+        Modal.info({
+          title: '信息',
+          content: '该订单已结束'
+        })
+        return
+      }
+      this.visible = true
     },
     // 结束订单
-    handleFinishOrder () {
-      let _this = this
-      axios.requestList(_this, '/order/finish_order', this.orderInfo, true)
+    async handleFinishOrder () {
+      let self = this.$http
+      let item = this.orderInfo
+      let options = {
+        url: '/api/updateOrderTable',
+        method: 'post'
+      }
+      let params = {
+        status: '结束行程',
+        order_sn: item.order_sn
+      }
+      const result = await axios.getData(self, options, params)
+      if (result.length) {
+        // 重新获取更新状态后到列表数据
+        this.searchParams = {
+          status: 'update'
+        }
+      }
+      this.visible = false
+      message.info('订单结束成功')
     },
     hideOpenOrder () {
       this.visible = false

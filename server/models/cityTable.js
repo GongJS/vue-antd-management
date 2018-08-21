@@ -12,26 +12,10 @@ const getCityTable = async function (params) {
 }
 
 const searchCityTable = async function (params) {
-  if (params.name === '全部') {
-    params.name = ['天津', '北京', '深圳']
-  } else {
-    params.name = [params.name]
-  }
-  if (params.mode === '全部') {
-    params.mode = ['停车点', '禁停区']
-  } else {
-    params.mode = [params.mode]
-  }
-  if (params.op_mode === '全部') {
-    params.op_mode = ['自营', '加盟']
-  } else {
-    params.op_mode = [params.op_mode]
-  }
-  if (params.status === '全部') {
-    params.status = ['已授权', '未授权']
-  } else {
-    params.status = [params.status]
-  }
+  params.name === '全部' ? params.name = ['天津', '北京', '深圳'] : params.name = [params.name]
+  params.mode === '全部' ? params.mode = ['停车点', '禁停区'] : params.mode = [params.mode]
+  params.op_mode === '全部' ? params.op_mode = ['自营', '加盟'] : params.op_mode = [params.op_mode]
+  params.status === '全部' ? params.status = ['已授权', '未授权'] : params.ostatus = [params.status]
   const result = await cityTable.findAndCount({
     where: {
       name: {

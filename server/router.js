@@ -14,6 +14,9 @@ export default function (app) {
   router.post('/api/createCityTable', jwt({secret: 'vue-koa-demo'}), CityTableController.createCityTable)
   router.post('/api/getOrderTable', jwt({secret: 'vue-koa-demo'}), OrderTableController.getOrderTable)
   router.post('/api/searchOrderTable', jwt({secret: 'vue-koa-demo'}), OrderTableController.searchOrderTable)
+  router.post('/api/updateOrderTable', jwt({secret: 'vue-koa-demo'}), OrderTableController.updateOrderTable)
+  router.post('/api/searchByIdOrderTable', jwt({secret: 'vue-koa-demo'}), OrderTableController.searchByIdOrderTable)
+
   app.use(router.routes())
     .use(router.allowedMethods())
 }

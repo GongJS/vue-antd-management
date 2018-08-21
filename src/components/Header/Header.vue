@@ -8,12 +8,12 @@
       <a-col :span="18" v-if="type === 'common'">
         <div v-if="isLogin">
           <span>欢迎回来，{{userName}}</span>
-          <a-button type="danger" style="margin-left:10px;">
-            <router-link to="home">退出</router-link>
-          </a-button>
+          <a-button type="danger" @click="logout" style="margin-left:10px;">退出</a-button>
         </div>
         <div v-else>
-          <a-button type="primary">马上登录</a-button>
+          <a-button type="primary">
+            <router-link to="/login">马上登录</router-link>
+          </a-button>
         </div>
       </a-col>
       <a-col :span="24" v-else>

@@ -7,23 +7,23 @@
           <ul class="detail-form">
             <li>
               <div class="detail-form-left">用车模式</div>
-              <div class="detail-form-content">{{info.mode == 1 ?'服务区':'停车点'}}</div>
+              <div class="detail-form-content">{{orderInfo.mode == 1 ?'服务区':'停车点'}}</div>
             </li>
             <li>
               <div class="detail-form-left">订单编号</div>
-              <div class="detail-form-content">{{info.order_sn}}</div>
+              <div class="detail-form-content">{{userInfo.order_sn || ''}}</div>
             </li>
             <li>
               <div class="detail-form-left">车辆编号</div>
-              <div class="detail-form-content">{{info.bike_sn}}</div>
+              <div class="detail-form-content">{{userInfo.bike_sn}}</div>
             </li>
             <li>
               <div class="detail-form-left">用户姓名</div>
-              <div class="detail-form-content">{{info.user_name}}</div>
+              <div class="detail-form-content">{{userInfo.user_name}}</div>
             </li>
             <li>
               <div class="detail-form-left">手机号码</div>
-              <div class="detail-form-content">{{info.mobile}}</div>
+              <div class="detail-form-content">{{userInfo.mobile}}</div>
             </li>
           </ul>
         </div>
@@ -32,15 +32,15 @@
           <ul class="detail-form">
             <li>
               <div class="detail-form-left">行程起点</div>
-              <div class="detail-form-content">{{info.start_location}}</div>
+              <div class="detail-form-content">{{orderInfo.start_location}}</div>
             </li>
             <li>
               <div class="detail-form-left">行程终点</div>
-              <div class="detail-form-content">{{info.end_location}}</div>
+              <div class="detail-form-content">{{orderInfo.end_location}}</div>
             </li>
             <li>
               <div class="detail-form-left">行驶里程</div>
-              <div class="detail-form-content">{{info.distance/1000}}公里</div>
+              <div class="detail-form-content">{{orderInfo.distance/1000}}公里</div>
             </li>
           </ul>
         </div>
@@ -58,17 +58,15 @@ export default {
   },
   data () {
     return {
-      orderInfo: null,
+      orderInfo: {},
+      userInfo: {},
       map: null
     }
   },
-  computed: {
-    info: function () {
-      return this.orderInfo || {}
-    }
-  },
+
   methods: {
-    getDetailInfo (orderId) {
+    async  getDetailInfo (orderId) {
+      // 地图信息数据为mock
       axios.ajax({
         url: '/order/detail',
         data: {
@@ -83,6 +81,21 @@ export default {
           this.renderMap(res.result)
         }
       })
+    },
+
+    async getUserInfo (orderId) {
+      let self = this.$http
+      let options = {
+        url: '/api/searchByIdOrderTable',
+        method: 'post'
+      }
+      let params = {
+        order_sn: orderId
+      }
+      const userInfo = await axios.getData(self, options, params)
+      if (userInfo.order_sn) {
+        this.userInfo = userInfo
+      }
     },
 
     renderMap (result) {
@@ -163,6 +176,7 @@ export default {
   mounted () {
     let orderId = this.$route.params.id
     if (orderId) {
+      this.getUserInfo(orderId)
       this.getDetailInfo(orderId)
     }
   }
