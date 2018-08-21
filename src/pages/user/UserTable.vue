@@ -9,16 +9,15 @@
         :pagination=false
       />
       <template>
-        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="500" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"/>
+        <a-pagination showQuickJumper :defaultCurrent="params.page" :total="total" @change="onChangePage" style="float:right;margin:10px -9px 0 0;"/>
       </template>
     </a-card>
   </div>
 </template>
 <script>
 import {Card, Table, Modal, Button, message, Pagination} from 'ant-design-vue'
-import axios from './../../axios/index'
+import axios from '@/axios/'
 import dataSource from './data'
-
 export default {
   name: 'userTable',
   props: ['requestList'],
@@ -36,8 +35,10 @@ export default {
       selectedRowKeys: [],
       pagination: {},
       columns: dataSource.columns,
+      total: null,
       params: {
-        page: 1
+        page: 1,
+        pageSize: 10
       },
       requestListFlag: this.requestList
     }
@@ -64,22 +65,20 @@ export default {
     }
   },
   methods: {
-    // 动态获取mock数据
-    request () {
-      axios.ajax({
-        url: '/table/list1',
-        data: {
-          params: {
-            page: this.params.page
-          }
-        }
-      }).then((res) => {
-        let list = res.result.list.map((item, index) => {
-          item.key = index
-          return item
-        })
-        this.dataSource = list
+    // 动态获取数据
+    async request () {
+      let self = this.$http
+      let options = {
+        url: '/api/getPersonnelTable',
+        method: 'post'
+      }
+      let params = this.params
+      const result = await axios.getData(self, options, params)
+      result.rows.map((item, index) => {
+        item.key = index
       })
+      this.total = result.count
+      this.dataSource = result.rows
     },
     handleDelete () {
       let rows = this.selectedRows

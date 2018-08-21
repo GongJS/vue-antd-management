@@ -1,5 +1,8 @@
 <script>
 import { Form, Button, Select, Modal } from 'ant-design-vue'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 const FormItem = Form.Item
 const Option = Select.Option
 
@@ -45,19 +48,19 @@ const CollectionCreateForm = Form.create()(
               {...{ props: formItemLayout }}
               label='订单编号'
             >
-              {orderInfo.order_sn}
+              <p>{orderInfo.order_sn}</p>
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='行程开始时间'
             >
-              {orderInfo.start_time}
+              <p>{moment(orderInfo.start_time).utcOffset(-0).format('YYYY-MM-DD HH:mm:ss')}</p>
             </a-form-item>
             <a-form-item
               {...{ props: formItemLayout }}
               label='行程结束时间'
             >
-              {orderInfo.end_time}
+              <p>{orderInfo.end_time}</p>
             </a-form-item>
           </a-form>
         </a-modal>

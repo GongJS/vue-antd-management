@@ -53,9 +53,10 @@ const updateOrderTable = async function (params, end_time) {
         order_sn: params.order_sn
       }
     }
-  ) 
+  )
   return result // 返回数据
 }
+
 export default {
   getOrderTable,
   searchOrderTable,

@@ -21,7 +21,7 @@
 
 <script>
 import { Button, Card, Modal } from 'ant-design-vue'
-import axios from './../../axios'
+import axios from '@/axios/'
 import UserLogin from './UserLoginForm'
 import UserTable from './UserTable'
 import UserForm from './UserForm'
@@ -38,8 +38,8 @@ export default {
   data () {
     return {
       visible: false,
-      selectData: {},
       userInfo: {},
+      selectItem: {},
       title: '',
       requestList: false
     }
@@ -47,13 +47,15 @@ export default {
   methods: {
     // 操作员工
     handleOperator (type) {
-      this.userInfo = this.selectData
+      let self = this.$http
+      let _this = this
+      let deleteId
       if (type === 'create') {
         this.title = '创建员工'
         this.visible = true
         this.userInfo = null
       } else if (type === 'edit' || type === 'detail') {
-        if (!this.userInfo.id) {
+        if (!this.selectItem.id) {
           Modal.info({
             title: '信息',
             content: '请选择一个用户'
@@ -62,8 +64,9 @@ export default {
         }
         this.title = (type === 'edit' ? '编辑用户' : '用户详情')
         this.visible = true
+        deleteId = this.selectItem.id
       } else if (type === 'delete') {
-        if (!this.userInfo.id) {
+        if (!this.selectItem.id) {
           Modal.info({
             title: '信息',
             content: '请选择一个用户'
@@ -72,21 +75,19 @@ export default {
         }
         Modal.confirm({
           content: '确定要删除此用户吗？',
-          onOk: () => {
-            axios.ajax({
-              url: '/user/delete',
-              data: {
-                params: {
-                  id: this.userInfo.id
-                }
-              }
-            }).then((res) => {
-              // eslint-disable-next-line
-              if (res.code == 0) {
-                this.visible = false
-                this.requestList = !this.requestList
-              }
-            })
+          onOk: async () => {
+            let options = {
+              url: '/api/deletePersonnelTable',
+              method: 'post'
+            }
+            let params = {
+              id: deleteId
+            }
+            const result = await axios.getData(self, options, params)
+            if (result === '删除成功') {
+            // 通知UserTable更新数据
+              _this.requestList = !_this.requestList
+            }
           }
         })
       }
@@ -94,11 +95,14 @@ export default {
     hideForm (data) {
       this.visible = false
       if (data === 'update') {
+        // 通知UserTable更新数据
         this.requestList = !this.requestList
       }
     },
     receiveTable (data) {
-      this.selectData = data
+      console.log(11)
+      this.userInfo = data
+      this.selectItem = data
     }
   }
 }
