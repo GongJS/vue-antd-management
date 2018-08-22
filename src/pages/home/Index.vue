@@ -1,9 +1,10 @@
 <template>
   <div class="index-wrap">
+    <img src="../../../static/vue-index.png" style="width:100%;height:100%;">
      <div class="title">
        <p>欢迎使用Vue-antd管理系统</p>
-       <p style="font-size: 30px; color:#f3b7b7;">Author: redell</p>
-       <p style="font-size: 30px;"><a style="color:#f3b7b7;" href="https://github.com/GongJS/vue-antd-management">Github: GongJS</a></p>
+       <p style="font-size: 30px; color:#a95d5d;">Author: redell</p>
+       <p style="font-size: 30px;"><a style="color:#a95d5d;" href="https://github.com/GongJS/vue-antd-management">Github: GongJS</a></p>
      </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ export default {
   data () {
     return {
       config: {
+        color: '255,25,0',
         count: 99
       }
     }
