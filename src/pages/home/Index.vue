@@ -5,11 +5,10 @@
        <p style="font-size: 30px; color:#f3b7b7;">Author: redell</p>
        <p style="font-size: 30px;"><a style="color:#f3b7b7;" href="https://github.com/GongJS/vue-antd-management">Github: GongJS</a></p>
      </div>
-     <canvas-nest></canvas-nest>
   </div>
 </template>
 <script>
-import CanvasNest from '@/components/CanvasNest/CanvasNest'
+import CanvasNest from 'canvas-nest.js'
 export default {
   name: 'Index',
   components: {
@@ -17,7 +16,20 @@ export default {
   },
   data () {
     return {
+      config: {
+        count: 99
+      }
     }
+  },
+  mounted () {
+    const el = document.querySelector('#CanvasNest')
+    el.style.display = 'block'
+    this.cn = new CanvasNest(el, this.config)
+  },
+  beforeDestroy () {
+    const el = document.querySelector('#CanvasNest')
+    el.style.display = 'none'
+    this.cn.destroy()
   }
 }
 </script>

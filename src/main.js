@@ -11,6 +11,12 @@ Vue.prototype.$http = axios
 
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('demo-token')
+  const el = document.querySelector('#CanvasNest')
+  if (to.name !== 'Index') {
+    el.style.display = 'none'
+  } else {
+    el.style.display = 'block'
+  }
   if (token !== 'null' && token != null) {
     Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token // 全局设定header的token验证,Bearer后面需要添加个空格
   }

@@ -53,9 +53,10 @@ export default {
       if (type === 'create') {
         this.title = '创建员工'
         this.visible = true
+        // 因为共用一个Form表单，当用户新建员工时，即使选中了table里面的某一行数据，打开的From表单应该只有默认值，所以这里要清空userInfo；通过selectItem来判断用户有没有选中table的数据
         this.userInfo = null
       } else if (type === 'edit' || type === 'detail') {
-        if (!this.selectItem.id) {
+        if (!this.selectIte.id) {
           Modal.info({
             title: '信息',
             content: '请选择一个用户'

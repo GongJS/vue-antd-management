@@ -146,7 +146,6 @@ export default {
         if (err) {
           return
         }
-        console.log(555, _this.userInfo.id)
         let params = {
           username: values.username,
           sex: values.sex,
