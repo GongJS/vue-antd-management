@@ -7,7 +7,7 @@
       <a-button @click="handleOperator('detail')">员工详情</a-button>
       <a-button type="danger" icon="delete" @click="handleOperator('delete')">删除员工</a-button>
     </a-card>
-      <a-user-table v-on:receiveTable="receiveTable" :requestList="requestList"></a-user-table>
+      <a-user-table v-if="hackReset" v-on:receiveTable="receiveTable" :requestList="requestList" :updataData="updataData"></a-user-table>
     <a-user-from
       :visible="visible"
       :userInfo="userInfo"
@@ -41,7 +41,9 @@ export default {
       userInfo: {},
       selectItem: {},
       title: '',
-      requestList: false
+      requestList: false,
+      updataData: {},
+      hackReset: true
     }
   },
   methods: {
@@ -56,7 +58,8 @@ export default {
         // 因为共用一个Form表单，当用户新建员工时，即使选中了table里面的某一行数据，打开的From表单应该只有默认值，所以这里要清空userInfo；通过selectItem来判断用户有没有选中table的数据
         this.userInfo = null
       } else if (type === 'edit' || type === 'detail') {
-        if (!this.selectIte.id) {
+        // eslint-disable-next-line
+        if (this.selectItem.id == undefined) {
           Modal.info({
             title: '信息',
             content: '请选择一个用户'
@@ -67,7 +70,9 @@ export default {
         this.visible = true
         deleteId = this.selectItem.id
       } else if (type === 'delete') {
-        if (!this.selectItem.id) {
+        deleteId = this.selectItem.id
+        // eslint-disable-next-line
+        if (this.selectItem.id == undefined) {
           Modal.info({
             title: '信息',
             content: '请选择一个用户'
@@ -87,21 +92,33 @@ export default {
             const result = await axios.getData(self, options, params)
             if (result === '删除成功') {
             // 通知UserTable更新数据
-              _this.requestList = !_this.requestList
+              this.requestList = !_this.requestList
+              this.selectItem.id = undefined
+              this.hackReset = false
+              this.$nextTick(() => {
+                this.hackReset = true
+              })
             }
           }
         })
       }
     },
-    hideForm (data) {
+    hideForm (data, params) {
       this.visible = false
-      if (data === 'update') {
-        // 通知UserTable更新数据
+      // 更新完数据，通知UserTable更新数据
+      // eslint-disable-next-line
+      if (data === 'update' && params !== undefined) {
+        this.requestList = !this.requestList
+        this.updataData = params
+        return
+      }
+      // eslint-disable-next-line
+      if (data === 'update' && params == undefined) {
+        // 创建完数据，通知UserTable更新数据
         this.requestList = !this.requestList
       }
     },
     receiveTable (data) {
-      console.log(11)
       this.userInfo = data
       this.selectItem = data
     }

@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
 const login = async function (ctx, next) {
-  console.log(222)
   const data = ctx.request.body
   const userInfo = await user.getUserByName(data.user_name)
   if (userInfo != null) { // 如果查无此用户会返回null

@@ -13,7 +13,7 @@
       <div style="margin-bottom:10px">
         <a-button @click="handleDelete">删除</a-button>
       </div>
-      <a-table bordered :rowSelection="rowCheckSelection" :columns="columns" :dataSource="dataSource2" :pagination=false />
+      <a-table bordered :rowSelection="rowCheckSelection" :columns="columns" :dataSource="dataSource2" :pagination=false v-if="hackReset"/>
     </a-card>
     <a-card title="表格分页" style="margin:10px 0">
       <a-table bordered :columns=columns :dataSource="dataSource2" :pagination=false />
@@ -47,6 +47,7 @@ export default {
       pagination: {},
       columns: dataSource.columns,
       total: null,
+      hackReset: true,
       params: {
         page: 1,
         pageSize: 10
@@ -122,8 +123,14 @@ export default {
             id: ids
           }
           const result = await axios.getData(self, options, params)
+          console.log(result)
           if (result === '删除成功') {
             message.info('删除成功')
+            this.hackReset = false
+            this.$nextTick(() => {
+              this.hackReset = true
+            })
+            this.request()
           } else {
             message.info('删除失败')
           }

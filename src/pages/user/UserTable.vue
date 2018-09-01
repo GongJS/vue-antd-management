@@ -20,7 +20,7 @@ import axios from '@/axios/'
 import dataSource from './data'
 export default {
   name: 'userTable',
-  props: ['requestList'],
+  props: ['requestList', 'updataData'],
   components: {
     'a-button': Button,
     'a-table': Table,
@@ -46,6 +46,10 @@ export default {
   watch: {
     requestList () {
       this.request()
+    },
+    updataData () {
+      console.log(this.updataData)
+      this.$emit('receiveTable', this.updataData)
     }
   },
   computed: {
